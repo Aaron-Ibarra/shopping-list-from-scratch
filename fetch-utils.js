@@ -65,4 +65,15 @@ export async function fetchItems() {
     }
 }
 
-export async function buyItem() {}
+export async function buyItem(item) {
+    const response = await client
+        .from('shopping-list')
+        .update({ bought: !item.bought })
+        .match({ id: item.id });
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}

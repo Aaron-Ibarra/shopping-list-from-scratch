@@ -69,3 +69,14 @@ main {
 .hidden {
     display: none;
 }
+
+.bought {
+    text-decoration: line-through;
+    background-color: rgb(75, 102, 98);
+    width: fit-content;
+    height: fit-content;
+}
+
+#shopping-list li:hover {
+    cursor: pointer;
+}
