@@ -41,6 +41,17 @@ export async function createItem(item) {
 
 export async function deleteAllItems() {}
 
-export async function fetchItems() {}
+export async function fetchItems() {
+    const response = await client
+        .from('shopping-list')
+        .select('*')
+        .order('item')
+        .match({ user_id: client.auth.user().id });
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
 
 export async function buyItem() {}
