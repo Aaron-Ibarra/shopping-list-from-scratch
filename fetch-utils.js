@@ -29,7 +29,15 @@ export async function signOutUser() {
 }
 
 /* Data functions */
-export async function createItem(item) {}
+export async function createItem(item) {
+    const response = await client.from('shopping-list').insert({ item });
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
 
 export async function deleteAllItems() {}
 

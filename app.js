@@ -16,7 +16,10 @@ form.addEventListener('submit', async (e) => {
     const item = data.get('item');
     form.reset();
 
-    // createItem(item);
+    if (item) {
+        console.log('item is item yes');
+        await createItem(item);
+    }
 });
 
 /* Display Functions */
