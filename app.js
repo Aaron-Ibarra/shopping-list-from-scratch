@@ -1,12 +1,13 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
-import { createItem, fetchItems } from './fetch-utils.js';
+import { createItem, deleteAllItems, fetchItems } from './fetch-utils.js';
 import { renderItem } from './render-utils.js';
 
 /* Get DOM Elements */
 const form = document.getElementById('add-item');
 const shoppingList = document.getElementById('shopping-list');
+const deleteBtn = document.getElementById('delete-button');
 
 /* State */
 
@@ -26,6 +27,11 @@ form.addEventListener('submit', async (e) => {
         await createItem(item);
         displayListItems();
     }
+});
+
+deleteBtn.addEventListener('click', async () => {
+    await deleteAllItems();
+    displayListItems();
 });
 
 /* Display Functions */
