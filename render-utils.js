@@ -1,0 +1,1 @@
+function renderItem(item) {}
