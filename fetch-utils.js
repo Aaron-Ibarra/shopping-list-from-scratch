@@ -29,10 +29,10 @@ export async function signOutUser() {
 }
 
 /* Data functions */
-async function createItem(item) {}
+export async function createItem(item) {}
 
-async function deleteAllItems() {}
+export async function deleteAllItems() {}
 
-async function fetchItems() {}
+export async function fetchItems() {}
 
-async function buyItem() {}
+export async function buyItem() {}
