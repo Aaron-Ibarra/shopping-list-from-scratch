@@ -1,5 +1,7 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://gvhgebiiqjezrhkmcque.supabase.co';
+const SUPABASE_KEY =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2aGdlYmlpcWplenJoa21jcXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjgxMDgwMzcsImV4cCI6MTk4MzY4NDAzN30.IPXrWCU6kYe9JaHUfGPnQcuwKDHonUpaRuCgs3uCEok';
+
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* Auth related functions */
@@ -27,3 +29,51 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+export async function createItem(item) {
+    const response = await client.from('shopping-list').insert({ item });
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
+
+export async function deleteAllItems() {
+    const response = await client
+        .from('shopping-list')
+        .delete()
+        .match({ user_id: client.auth.user().id });
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
+
+export async function fetchItems() {
+    const response = await client
+        .from('shopping-list')
+        .select('*')
+        .order('item')
+        .match({ user_id: client.auth.user().id });
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
+
+export async function buyItem(item) {
+    const response = await client
+        .from('shopping-list')
+        .update({ bought: !item.bought })
+        .match({ id: item.id });
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
